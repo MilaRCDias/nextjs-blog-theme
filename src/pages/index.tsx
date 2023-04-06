@@ -1,8 +1,26 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
+import {
+  useShellStore,
+} from '@medlify/platform.shell';
+import styled, {css} from 'styled-components';
+
+
+const StyledBtn = styled.button`
+  ${({theme}: any) => css`
+    background-color: ${theme.color};
+    padding: 16px;
+    width: 80px;
+  `}
+`;
+
 
 
 export default function Home() {
+      const tenantId = useShellStore(
+        (state) => state.tenantId
+      );
+
   return (
     <>
       <Head>
@@ -13,7 +31,14 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.center}>
-          <div id="remote-app-next" style={{border:'1px solid orange', padding:'80px'}}> REMOTE NEXT APP </div>
+          <div
+            id="remote-app-next"
+            style={{border: '1px solid orange', padding: '80px'}}
+          >
+            {' '}
+            REMOTE NEXT APP Global store: {tenantId}
+          </div>
+          <StyledBtn>style button remote</StyledBtn>
         </div>
       </main>
     </>
